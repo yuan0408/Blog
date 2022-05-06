@@ -11,7 +11,7 @@ import (
 	"net/http"
 )
 
-//retrieve
+// GetTags retrieve
 func GetTags(c *gin.Context) {
 	name := c.Query("name")
 
@@ -40,7 +40,7 @@ func GetTags(c *gin.Context) {
 	})
 }
 
-//update
+// EditTag update
 func EditTag(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 	name := c.Query("name")
@@ -84,7 +84,7 @@ func EditTag(c *gin.Context) {
 	})
 }
 
-//delete
+// DeleteTag delete
 func DeleteTag(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 
@@ -108,7 +108,7 @@ func DeleteTag(c *gin.Context) {
 	})
 }
 
-//create
+// AddTag create
 func AddTag(c *gin.Context) {
 	name := c.Query("name")
 	state := com.StrTo(c.DefaultQuery("state", "0")).MustInt()

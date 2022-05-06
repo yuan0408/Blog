@@ -25,6 +25,7 @@ func init() {
 	if err != nil {
 		log.Fatalf("Fail to parse 'conf/app.ini': %v", err)
 	}
+	//加载各个区域的值
 	LoadBase()
 	LoadApp()
 	LoadServer()
