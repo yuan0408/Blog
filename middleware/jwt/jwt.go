@@ -14,6 +14,7 @@ func JWT() gin.HandlerFunc {
 		var data interface{}
 
 		code = e.SUCCESS
+		//TODO token放入header
 		token := c.Query("token")
 		if token == "" {
 			code = e.INVALID_PARAMS

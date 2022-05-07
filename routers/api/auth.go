@@ -6,7 +6,8 @@ import (
 	"github.com/yuan0408/go-gin-example/models"
 	"github.com/yuan0408/go-gin-example/pkg/e"
 	"github.com/yuan0408/go-gin-example/pkg/util"
-	"log"
+	//"log"
+	log "github.com/yuan0408/go-gin-example/pkg/logging"
 	"net/http"
 )
 
@@ -37,7 +38,7 @@ func GetAuth(c *gin.Context) {
 		}
 	} else {
 		for _, err := range valid.Errors {
-			log.Println(err.Key, err.Value)
+			log.Info(err.Key, err.Value)
 		}
 	}
 

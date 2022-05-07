@@ -8,7 +8,8 @@ import (
 	"github.com/yuan0408/go-gin-example/pkg/e"
 	"github.com/yuan0408/go-gin-example/pkg/setting"
 	"github.com/yuan0408/go-gin-example/pkg/util"
-	"log"
+	//"log"
+	log "github.com/yuan0408/go-gin-example/pkg/logging"
 	"net/http"
 )
 
@@ -30,7 +31,7 @@ func GetArticle(c *gin.Context) {
 		}
 	} else {
 		for _, v := range valid.Errors {
-			log.Printf("err.key: %s, err.message: %s", v.Key, v.Message)
+			log.Info(v.Key, v.Message)
 		}
 	}
 
@@ -69,7 +70,7 @@ func GetArticles(c *gin.Context) {
 		data["total"] = models.GetTagTotal(maps)
 	} else {
 		for _, err := range valid.Errors {
-			log.Printf("err.key: %s, err.message: %s", err.Key, err.Message)
+			log.Info(err.Key, err.Message)
 		}
 	}
 
@@ -115,7 +116,7 @@ func AddArticle(c *gin.Context) {
 		}
 	} else {
 		for _, err := range valid.Errors {
-			log.Printf("err.key: %s, err.message: %s", err.Key, err.Message)
+			log.Info(err.Key, err.Message)
 		}
 	}
 
@@ -180,7 +181,7 @@ func EditArticle(c *gin.Context) {
 		}
 	} else {
 		for _, err := range valid.Errors {
-			log.Printf("err.key: %s, err.message: %s", err.Key, err.Message)
+			log.Info("err.key: %s, err.message: %s", err.Key, err.Message)
 		}
 	}
 
@@ -208,7 +209,7 @@ func DeleteArticle(c *gin.Context) {
 		}
 	} else {
 		for _, err := range valid.Errors {
-			log.Printf("err.key: %s, err.message: %s", err.Key, err.Message)
+			log.Info(err.Key, err.Message)
 		}
 	}
 
