@@ -9,6 +9,9 @@ import (
 	"syscall"
 )
 
+// @title Golang Gin API
+// @version 1.0
+// @description An example of gin
 func main() {
 	//给进程发送SIGTERM信号实现优雅的重启
 	endless.DefaultReadTimeOut = setting.ReadTimeout
