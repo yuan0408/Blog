@@ -1,10 +1,5 @@
 package models
 
-import (
-	"github.com/jinzhu/gorm"
-	"time"
-)
-
 type Tag struct {
 	//嵌入自定义model
 	Model
@@ -31,7 +26,7 @@ func GetTagTotal(maps interface{}) (count int) {
 func ExistTagByName(name string) bool {
 	var tag Tag
 	//Select指定你从表中选择的字段，First只返回符合条件的第一行
-	db.Select("id").Where("name = ?", name).First(&tag)
+	db.Select("id").Where("name = ? AND deleted_on = ?", name, 0).First(&tag)
 	if tag.ID > 0 {
 		return true
 	}
@@ -49,22 +44,22 @@ func AddTag(name, createdBy string, state int) bool {
 }
 
 // BeforeCreate hooks，每次创建一个Tag都会先更新created_on字段的值
-func (t *Tag) BeforeCreate(scope *gorm.Scope) error {
-	scope.SetColumn("created_on", time.Now().Unix())
-
-	return nil
-}
+//func (t *Tag) BeforeCreate(scope *gorm.Scope) error {
+//	scope.SetColumn("created_on", time.Now().Unix())
+//
+//	return nil
+//}
 
 // BeforeUpdate hooks，每次更新一个Tag都会先更新modified_on字段的值
-func (t *Tag) BeforeUpdate(scope *gorm.Scope) error {
-	scope.SetColumn("modified_on", time.Now().Unix())
-
-	return nil
-}
+//func (t *Tag) BeforeUpdate(scope *gorm.Scope) error {
+//	scope.SetColumn("modified_on", time.Now().Unix())
+//
+//	return nil
+//}
 
 func ExistTagById(id int) bool {
 	var tag Tag
-	db.Select("id").Where("id = ?", id).First(&tag)
+	db.Select("id").Where("id = ? AND deleted_on = ?", id, 0).First(&tag)
 	if tag.ID > 0 {
 		return true
 	}
@@ -78,7 +73,7 @@ func DeleteTag(id int) bool {
 }
 
 func EditTag(id int, data interface{}) bool {
-	db.Model(&Tag{}).Where("id = ?", id).Updates(data)
+	db.Model(&Tag{}).Where("id = ? AND deleted_on = ?", id, 0).Updates(data)
 
 	return true
 }
